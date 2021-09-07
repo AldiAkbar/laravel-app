@@ -5,11 +5,12 @@
         <h1 class="h2">{{ $title }}</h1>
     </div>
     <div class="col-lg-8 mb-4">
-        <form action="/dashboard/posts" method="POST">
+        <form action="/dashboard/posts/{{ $post->slug }}" method="POST">
+            @method('put')
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{ old('title') }}" autofocus>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{ old('title', $post->title) }}" autofocus>
                 @error('title')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -18,7 +19,7 @@
             </div>
             <div class="mb-3">
                 <label for="slug" class="form-label">Slug</label>
-                <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{ old('slug') }}">
+                <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{ old('slug', $post->slug) }}">
                 @error('slug')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -30,10 +31,11 @@
                 <select id="category" class="form-select" name="category_id">
                     <option selected>Select one</option>
                     @foreach ($categories as $category)
-                        @if (old('category_id') == $category->id)
+                        @if (old('category_id', $post->category_id) == $category->id)
                             <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                        @endif
+                        @else
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -42,10 +44,10 @@
                 @error('body')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
-                <input id="body" type="hidden" name="body"  value="{{ old('body') }}">
+                <input id="body" type="hidden" name="body"  value="{{ old('body', $post->body) }}">
                 <trix-editor input="body"></trix-editor>
             </div>
-            <button type="submit" class="btn btn-primary">Create Post</button>
+            <button type="submit" class="btn btn-primary">Edit Post</button>
         </form>
     </div>
 <script>
