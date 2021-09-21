@@ -10,7 +10,7 @@
         {{ session('success') }}
       </div>
     @elseif(session()->has('danger'))
-          <div class="alert alert-success col-lg-8" role="alert">
+      <div class="alert alert-success col-lg-8" role="alert">
         {{ session('danger') }}
       </div>
     @endif

@@ -13,7 +13,13 @@
                     @csrf
                     <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure want to delete this?')"><span data-feather="x-circle"></span>Delete</button>
                 </form>
-                <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" alt="{{ $post->category->name }}" class="img-fluid my-3">
+                @if ($post->image)
+                    <div style="max-height: 350px; overflow: hidden;">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->category->name }}" class="img-fluid my-3">
+                    </div>
+                @else
+                    <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" alt="{{ $post->category->name }}" class="img-fluid my-3">
+                @endif
                 <article>
                     {!! $post->body  !!}
                 </article>

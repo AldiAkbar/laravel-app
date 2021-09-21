@@ -17,6 +17,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        User::create([
+            'name' => 'Aldi Akbar Alimi',
+            'username' => 'aldiakbar',
+            'email' => 'aldiakbar373@gmail.com',
+            'password' => bcrypt('dongo123')
+        ]);
+
         User::factory(3)->create();
         
         Category::create([
@@ -36,11 +44,6 @@ class DatabaseSeeder extends Seeder
 
         Post::factory(20)->create();
 
-        // User::create([
-        //     'name' => 'Aldi Akbar Alimi',
-        //     'email' => 'aldiakbar373@gmail.com',
-        //     'password' => bcrypt('dongo123')
-        // ]);
 
         // User::create([
         //     'name' => 'Muhammad Alfin Rosyada',
