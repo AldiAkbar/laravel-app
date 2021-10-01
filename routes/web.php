@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\AdminCategoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -47,6 +48,8 @@ Route::get('/dashboard', function() {
 Route::get('/dashboard/posts/newSlug', [DashboardPostController::class, 'newSlug'])->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');
 
 
 
